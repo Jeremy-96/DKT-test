@@ -1,0 +1,31 @@
+/* import Roboto font start */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+/* import Roboto font end */
+
+/* global css poperties start */
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+html, body {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+body {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	overflow-x: hidden;
+	font-family: "Roboto", sans-serif;
+}
+a {
+	text-decoration: none;
+}
+button {
+	border: 0;
+}
+/* global css poperties end */
+
+
