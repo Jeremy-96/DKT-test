@@ -50,7 +50,6 @@
 
     if (searchTag != null && searchTag.length > 0){
       localStorage.setItem('currentPage', 1);
-      page = 1;
       const results = hasId.filter(sport => sport.relationships.tags.data.includes(searchTag));
       pageCount = Math.ceil(results.length / paginationLimit)
       return results;
@@ -290,6 +289,13 @@ section {
   .infos-description, .infos-tags{
     display:none;
   }
+  .page-btn p{
+    display: none;
+  }
+  .page-btn svg {
+    width: 13px;
+    height: 20px;
+  }
 }
 
 @media screen and (max-width: 375px){
@@ -305,13 +311,6 @@ section {
     width:40px;
     height:40px;
     padding: 0;
-  }
-  .page-btn p{
-    display: none;
-  }
-  .page-btn svg {
-    width: 13px;
-    height: 20px;
   }
 }
 /* Breakpoints for tablet & mobile end */

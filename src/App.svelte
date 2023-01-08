@@ -46,7 +46,6 @@
 	top: 0;
 	left: 0;
 	width: 100%;
-	max-width: 1600px;
 	min-height: 100%;
 	display: flex;
 	flex-direction: column;
