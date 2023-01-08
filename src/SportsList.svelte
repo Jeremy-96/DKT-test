@@ -49,11 +49,21 @@
     }
 
     if (searchTag != null && searchTag.length > 0){
-      localStorage.setItem('currentPage', 1);
       let cleanSearchTag = searchTag.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~() ]/g,"");
       const results = hasId.filter(sport => sport.relationships.tags.data.includes(cleanSearchTag));
+      if(results.length > 0){
+        localStorage.setItem('currentPage', 1);
+        console.log("hello");
+      }
+      else {
+        localStorage.setItem('currentPage', 0);
+        currentPage = localStorage.getItem('currentPage');
+        console.log("else");
+      }
       pageCount = Math.ceil(results.length / paginationLimit)
+
       return results;
+
     } else {
       pageCount = Math.ceil(hasId.length / paginationLimit)
       return hasId;
@@ -94,6 +104,12 @@
         </figure>
       {/if}
     {/each}
+
+    {#if currentPage == 0}
+      <div class="no-results">
+        <h2>No results...</h2>
+      </div>
+    {/if}
   </section>
 
   <div class="page">
@@ -220,6 +236,13 @@ section {
   text-decoration: underline;
   color: #00689D;
 }
+.no-results {
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .page {
   width: 100%;
   height: 100px;
@@ -290,6 +313,11 @@ section {
   .infos-description, .infos-tags{
     display:none;
   }
+  .page-btn {
+    width:40px;
+    height:40px;
+    padding: 0;
+  }
   .page-btn p{
     display: none;
   }
@@ -307,11 +335,6 @@ section {
   .sport-card {
     width: 150px;
     height: 150px;
-  }
-  .page-btn {
-    width:40px;
-    height:40px;
-    padding: 0;
   }
 }
 /* Breakpoints for tablet & mobile end */
