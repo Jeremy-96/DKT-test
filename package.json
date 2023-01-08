@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "sirv-cli": "^2.0.0",
+    "svelte-lazy-image": "^0.5.1",
     "svelte-router": "^3.0.0-alpha.2",
     "svelte-routing": "^1.6.0"
   }

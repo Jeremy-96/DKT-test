@@ -1,10 +1,12 @@
 <script>
+	import { Router, Route } from "svelte-routing";
 	import Header from "./Header.svelte";
 	import SportsList from "./SportsList.svelte";
 	import Footer from "./Footer.svelte";
+  import Sport from "./Sport.svelte";
 
 	/**
-	 * Get a lsit of all sports
+	 * Get a list of all sports
 	 */
 	const promise = getAllSports();
 
@@ -17,19 +19,25 @@
 </script>
 
 <!-- HTML start -->
-<div class="container">
-	<Header />
+	<div class="container">
+		<Header />
 
-	{#await promise}
-		<p>Chargement...</p>
-	{:then sports}
-	<SportsList sports={sports} />
-	{:catch error}
-		<p>Une erreur s'est produite : {error.message}</p>
-	{/await}
+		{#await promise}
+			<p>Chargement...</p>
+		{:then sports}
+		<SportsList sports={sports} />
+		{:catch error}
+			<p>Une erreur s'est produite : {error.message}</p>
+		{/await}
+		
+		<Router>
+			<Route path="/sport/:id" let:params >
+				<Sport id="{params.id}" />
+			</Route>
+		</Router>
 
-	<Footer />
-</div>
+		<Footer />
+	</div>
 <!-- HTML end -->
 
 <style>
@@ -38,6 +46,7 @@
 	top: 0;
 	left: 0;
 	width: 100%;
+	max-width: 1600px;
 	min-height: 100%;
 	display: flex;
 	flex-direction: column;

@@ -1,25 +1,75 @@
 <script>
+  import { link } from 'svelte-routing';
   export let sports = [];
 
   const paginationLimit = 12;
-  const pageCount = Math.ceil(sports.length / paginationLimit);
+  let pageCount = Math.ceil(sports.length / paginationLimit);
   let currentPage = 1;
+  localStorage.setItem('currentPage', currentPage);
+  let searchTag = localStorage.getItem('input');
+  let hasDktId = localStorage.getItem('hasDktID');
+  let url = window.location.href;
+  let searchParams = new window.URL(url).searchParams;
+  let page = searchParams.get('page');
 
-  function previousPage(){
-    currentPage -= 1;
+  if(page && searchTag.length == 0){
+    localStorage.setItem('currentPage', page);
+    currentPage = parseInt(page);
+  }else {
+    currentPage = parseInt(localStorage.getItem('currentPage'));
+    console.log(typeof currentPage);
   }
+
+  /**
+   * PreviousPage and nextPage is used to change the current page 
+   */
+  function previousPage(){
+    if (currentPage > 1) {
+      currentPage -= 1;
+      localStorage.setItem('currentPage', currentPage);
+      window.history.pushState({}, '', `?page=${currentPage}`);
+    }
+  }
+
   function nextPage(){
-    currentPage += 1;
+    if (currentPage < pageCount) {
+      currentPage += 1;
+      localStorage.setItem('currentPage', currentPage);
+      window.history.pushState({}, '', `?page=${currentPage}`);
+    }
+  }
+
+  function searchResult(){
+    let hasId;
+
+    if(hasDktId == 'true'){
+      hasId = sports.filter(sport => sport.attributes.decathlon_id != null);
+    } else{
+      hasId = sports;
+    }
+
+    if(searchTag.length > 0){
+      localStorage.setItem('currentPage', 1);
+      page = 1;
+      const results = hasId.filter(sport => sport.relationships.tags.data.includes(searchTag));
+      pageCount = Math.ceil(results.length / paginationLimit)
+      return results;
+    } else {
+      pageCount = Math.ceil(hasId.length / paginationLimit)
+      return hasId;
+    }
   }
 </script>
 
 <!-- HTML start -->
 <main>
   <section>
-    {#each sports as sport, index}
-      {#if index <= (currentPage * paginationLimit) - 1 && index >= (currentPage - 1) * paginationLimit && index < sports.length}
+    {#each searchResult() as sport, index}
+      {#if (index <= (currentPage * paginationLimit) - 1) && (index >= (currentPage - 1) * paginationLimit)}
         <figure class="sport-card">
-          <img class="card-img" src={sport.relationships.images.data[0].url} alt={sport.attributes.name}>
+          {#if sport.relationships.images.data.length > 0}
+            <img class="card-img" src={sport.relationships.images.data[0].url} alt={sport.attributes.name}>
+          {/if}
 
           <figcaption class="card-infos">
             <h3 class="infos-title">{sport.attributes.name}</h3>
@@ -39,7 +89,7 @@
               {/each}
             </div>
             {/if}
-            <a href="/" class="infos-link">See more</a>
+            <a href={`/sport/${sport.id}`} class="infos-link"  use:link>See more</a>
           </figcaption>
         </figure>
       {/if}
@@ -96,19 +146,16 @@ main {
 section {
   width: 100%;
   height: 80%;
-  padding: 2rem 8rem 0 8rem;
+  padding: 2rem;
   display:flex;
   flex-wrap: wrap;
   align-items:center;
-  justify-content: space-between;
+  justify-content: center;
 }
-
-
-/* Sport card css properties start */
 .sport-card {
   width: 320px;
   height: 380px;
-  margin: 2rem 0;
+  margin: 2rem;
   display:flex;
   flex-direction: column;
   align-items:center;
@@ -162,7 +209,6 @@ section {
   background-color: #EFF1F3;
   border-radius: 4px;
 }
-
 .infos-link {
   height: 30%;
   margin: 1rem 0 0 0;
@@ -199,8 +245,7 @@ section {
   margin: 0 1.5rem;
 }
 
-
-/* Breakpoints tablet & mobile start */
+/* Breakpoints for tablet & mobile start */
 @media screen and (max-width: 1024px){
   section {
     padding: 2rem 5rem 0 5rem;
@@ -246,6 +291,7 @@ section {
     display:none;
   }
 }
+
 @media screen and (max-width: 375px){
   section {
     padding: 1rem 0.5rem 0 0.5rem;
@@ -268,5 +314,5 @@ section {
     height: 20px;
   }
 }
-/* Breakpoints tablet & mobile end */
+/* Breakpoints for tablet & mobile end */
 </style>
