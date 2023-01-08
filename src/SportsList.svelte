@@ -50,7 +50,8 @@
 
     if (searchTag != null && searchTag.length > 0){
       localStorage.setItem('currentPage', 1);
-      const results = hasId.filter(sport => sport.relationships.tags.data.includes(searchTag));
+      let cleanSearchTag = searchTag.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~() ]/g,"");
+      const results = hasId.filter(sport => sport.relationships.tags.data.includes(cleanSearchTag));
       pageCount = Math.ceil(results.length / paginationLimit)
       return results;
     } else {
