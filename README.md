@@ -1,108 +1,108 @@
-# This repo is no longer maintained. Consider using `npm init vite` and selecting the `svelte` option or — if you want a full-fledged app framework and don't mind using pre-1.0 software — use [SvelteKit](https://kit.svelte.dev), the official application framework for Svelte.
+# **DKT-test**
 
----
+## **Introduction** 
 
-# svelte app
+Dkt-test is a simple web application in wich you can access a list of sports, sorting them thanks to a search-bar and view a description of one specific sport by clicking on it. All sports information can be found in the [Decathlon API](https://developers.decathlon.com/products/sports/docs).
 
-This is a project template for [Svelte](https://svelte.dev) apps. It lives at https://github.com/sveltejs/template.
+<br>
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+## **Technologies**
 
-```bash
-npx degit sveltejs/template svelte-app
-cd svelte-app
+*This application is created with the following technologies:*
+
+<img src="https://user-images.githubusercontent.com/25181517/192158954-f88b5814-d510-4564-b285-dff7d6400dad.png" alt="HTML icon" style="width: 25px" />
+<img src="https://user-images.githubusercontent.com/25181517/183898674-75a4a1b1-f960-4ea9-abcb-637170a00a75.png" alt="HTML icon" style="width: 25px" />
+<img src="https://user-images.githubusercontent.com/25181517/117447155-6a868a00-af3d-11eb-9cfe-245df15c9f3f.png" alt="HTML icon" style="width: 25px" />
+<img src="https://user-images.githubusercontent.com/25181517/121401671-49102800-c959-11eb-9f6f-74d49a5e1774.png" alt="HTML icon" style="width: 25px" />
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Svelte_Logo.svg/1200px-Svelte_Logo.svg.png" alt="HTML icon" style="width: 25px" />
+
+*The mockup is made with :* 
+
+<img src="https://user-images.githubusercontent.com/25181517/189715289-df3ee512-6eca-463f-a0f4-c10d94a06b2f.png" alt="HTML icon" style="width: 25px" />
+
+*The web application is deployed with :*
+
+<img src="https://logovtor.com/wp-content/uploads/2020/10/vercel-inc-logo-vector.png" alt="HTML icon" style="width: 50px" />
+
+<br>
+
+## **Getting started**  
+
+Before starting, make sure to have Node.js installed locally on your device:
+https://nodejs.org/fr/download/.
+(For a better experience, choose the LTS version).
+
+Now that you are ready to start, let's first clone the repository using the following command in your terminal:
 ```
+git clone https://github.com/Jeremy-96/dkt-test.git
+```  
 
-*Note that you will need to have [Node.js](https://nodejs.org) installed.*
+Then go to the folder containing the code
+```
+cd dkt-test
+```  
 
-
-## Get started
-
-Install the dependencies...
-
-```bash
-cd svelte-app
+Install the packages that are needed to run the application 
+```
 npm install
+```  
+
+Finally, you can simply run the application using:
 ```
-
-...then start [Rollup](https://rollupjs.org):
-
-```bash
 npm run dev
-```
-
-Navigate to [localhost:8080](http://localhost:8080). You should see your app running. Edit a component file in `src`, save it, and reload the page to see your changes.
-
-By default, the server will only respond to requests from localhost. To allow connections from other computers, edit the `sirv` commands in package.json to include the option `--host 0.0.0.0`.
-
-If you're using [Visual Studio Code](https://code.visualstudio.com/) we recommend installing the official extension [Svelte for VS Code](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode). If you are using other editors you may need to install a plugin in order to get syntax highlighting and intellisense.
-
-## Building and running in production mode
-
-To create an optimised version of the app:
-
-```bash
-npm run build
-```
-
-You can run the newly built app with `npm run start`. This uses [sirv](https://github.com/lukeed/sirv), which is included in your package.json's `dependencies` so that the app will work when you deploy to platforms like [Heroku](https://heroku.com).
+```   
+<br>
 
 
-## Single-page app mode
+## **Structure of the code**  
 
-By default, sirv will only respond to requests that match files in `public`. This is to maximise compatibility with static fileservers, allowing you to deploy your app anywhere.
+*Here, you can find a description of the main files that are used to create the application:*   
 
-If you're building a single-page app (SPA) with multiple routes, sirv needs to be able to respond to requests for *any* path. You can make it so by editing the `"start"` command in package.json:
+### **/public** 
 
-```js
-"start": "sirv public --single"
-```
+* **global.css**  
+In this file, global css properties can be added to the project (html, body, button ect...).
 
-## Using TypeScript
+* **index.html**   
+Make the application accessible in the web browser.
 
-This template comes with a script to set up a TypeScript development environment, you can run it immediately after cloning the template with:
+### **/src**
 
-```bash
-node scripts/setupTypeScript.js
-```
+* **App.svelte**  
+This file calls all components created in the application.  
 
-Or remove the script via:
+* **Header.svelte**  
+This file represents the header block. You can find it on the top of the page. In this component, a search-bar has been implemented to find a sport using its tag or its name. ***(Note: It's possible that a tag is not linked to any sport. In this case you will receive an error message. Feel free to try again with another tag.)*** 
 
-```bash
-rm scripts/setupTypeScript.js
-```
+* **SportsList.svelte**  
+This component displays a list of all available sports in the Decathlon API. For each page, a maximum of twelve sports are shown. If you want to view more sports, feel free to go to another page by clicking on the page-btn at the bottom of the list.  
 
-If you want to use `baseUrl` or `path` aliases within your `tsconfig`, you need to set up `@rollup/plugin-alias` to tell Rollup to resolve the aliases. For more info, see [this StackOverflow question](https://stackoverflow.com/questions/63427935/setup-tsconfig-path-in-svelte).
+* **Sport.svelte**  
+This component is used to access a specific sport from the SportsList component. By clicking on the "See more" link that appears on each sport's card, you can see the full description of a sport.
 
-## Deploying to the web
 
-### With [Vercel](https://vercel.com)
+* **Footer.svelte**  
+This file represents the footer block. You can find it at the bottom of the page.
 
-Install `vercel` if you haven't already:
+**package.json**  
+This file contains all dependencies used by the application.
 
-```bash
-npm install -g vercel
-```
+<br>
 
-Then, from within your project folder:
+## **Continuous deployment**  
 
-```bash
-cd public
-vercel deploy --name my-project
-```
+The web application is continuously deployed using Github and [Vercel](https://vercel.com/).  
 
-### With [surge](https://surge.sh/)
+When a new version of the code is pushed to the main branch of the repository, Vercel automatically builds the application and deploys it on production. 
 
-Install `surge` if you haven't already:
 
-```bash
-npm install -g surge
-```
+## **Sources**
 
-Then, from within your project folder:
+* **[Node.js](https://nodejs.org/en/)**
 
-```bash
-npm run build
-surge public my-project.surge.sh
-```
-# dkt-test
+* **[Svelte doc](https://svelte.dev/docs)**
+
+* **[Decathlon API](https://developers.decathlon.com/products/sports/docs)**
+
+* **[Vercel](https://vercel.com/)**  
+
