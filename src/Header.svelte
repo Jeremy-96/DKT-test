@@ -2,11 +2,9 @@
 
 let searchQuery = "";
 let hasDktId = false;
-localStorage.setItem('input', searchQuery);
 
 function handleSearch(event){
   searchQuery = event.target.value;
-  console.log(searchQuery);
 }
 
 function handleSubmit(event){

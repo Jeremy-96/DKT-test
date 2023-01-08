@@ -7,6 +7,7 @@
   let currentPage = 1;
   localStorage.setItem('currentPage', currentPage);
   let searchTag = localStorage.getItem('input');
+
   let hasDktId = localStorage.getItem('hasDktID');
   let url = window.location.href;
   let searchParams = new window.URL(url).searchParams;
@@ -17,7 +18,6 @@
     currentPage = parseInt(page);
   }else {
     currentPage = parseInt(localStorage.getItem('currentPage'));
-    console.log(typeof currentPage);
   }
 
   /**
@@ -42,13 +42,13 @@
   function searchResult(){
     let hasId;
 
-    if(hasDktId == 'true'){
+    if (hasDktId == 'true'){
       hasId = sports.filter(sport => sport.attributes.decathlon_id != null);
     } else{
       hasId = sports;
     }
 
-    if(searchTag.length > 0){
+    if (searchTag != null && searchTag.length > 0){
       localStorage.setItem('currentPage', 1);
       page = 1;
       const results = hasId.filter(sport => sport.relationships.tags.data.includes(searchTag));
@@ -59,7 +59,6 @@
       return hasId;
     }
   }
-
 </script>
 
 <!-- HTML start -->
