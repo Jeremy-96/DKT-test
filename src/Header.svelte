@@ -159,7 +159,7 @@ a {
   margin: 0 1rem;
   border-radius: 3px;
   border: none;
-  background-color:#19202D;
+  cursor: pointer;
 }
 .id-input input::placeholder {
   width: auto;

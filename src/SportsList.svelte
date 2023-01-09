@@ -136,14 +136,14 @@
 
   <div class="page">
     {#if currentPage > (1)}
-      <button on:click={previousPage}  class="previous page-btn">
+      <button on:click={previousPage}  class="previous page-btn" aria-label="Previous">
         <svg width="14" height="21" viewBox="0 0 14 21" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M4.72701 9.95897L12.8586 17.8852L10.4555 20.064L0.00111645 9.87365L10.8166 0.0672866L13.1394 2.33146L4.72701 9.95897Z" fill="white"/>
         </svg>  
         <p>Previous</p>
       </button>
     {:else}
-      <button on:click={previousPage}  class="previous page-btn" style="background-color:grey"disabled>
+      <button on:click={previousPage}  class="previous page-btn" aria-label="Previous" style="background-color:grey"disabled>
         <svg width="14" height="21" viewBox="0 0 14 21" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M4.72701 9.95897L12.8586 17.8852L10.4555 20.064L0.00111645 9.87365L10.8166 0.0672866L13.1394 2.33146L4.72701 9.95897Z" fill="white"/>
         </svg>
@@ -154,14 +154,14 @@
     <span class="page-indicator">{currentPage} of {pageCount}</span>
 
     {#if currentPage <= (pageCount - 1) }
-      <button on:click={nextPage} class="next page-btn">
+      <button on:click={nextPage} class="next page-btn" aria-label="Next">
         <p>Next</p>
         <svg width="13" height="20" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M8.27334 10L0 2.22187L2.36333 0L13 10L2.36333 20L0 17.7781L8.27334 10Z" fill="white"/>
         </svg>
-        </button>
+      </button>
     {:else}
-      <button on:click={nextPage} class="next page-btn" style="background-color:grey"disabled> 
+      <button on:click={nextPage} class="next page-btn" aria-label="Next" style="background-color:grey"disabled> 
         <p>Next</p>
         <svg width="13" height="20" viewBox="0 0 13 20" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M8.27334 10L0 2.22187L2.36333 0L13 10L2.36333 20L0 17.7781L8.27334 10Z" fill="white"/>
@@ -193,7 +193,7 @@ section {
 .sport-card {
   width: 320px;
   height: 380px;
-  margin: 2rem;
+  margin: 1rem;
   display:flex;
   flex-direction: column;
   align-items:center;
@@ -225,7 +225,7 @@ section {
 }
 .infos-description {
   width: 100%;
-  height: 20%;
+  height: 15%;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
@@ -307,11 +307,11 @@ section {
 
 @media screen and (max-width: 768px){
   section {
-    padding: 2rem 1rem 0 1rem;
+    padding: 1rem 1rem 0 1rem;
   }
   .sport-card {
-    width: 250px;
-    height: 250px;
+    width: 45%;
+    height: 225px;
   }
   .card-img {
     height: 50%;
@@ -355,7 +355,6 @@ section {
     justify-content: space-around;
   }
   .sport-card {
-    width: 150px;
     height: 150px;
   }
 }

@@ -22,7 +22,7 @@
       
     <h2>WORLD PADEL TOUR ET KUIKMA</h2>
 
-    <p>Le World Padel Tour est le circuit professionnel qui réunit <strong>les meilleurs<br> joueurs du monde</strong><br>
+    <p class="paragraph">Le World Padel Tour est le circuit professionnel qui réunit <strong>les meilleurs<br> joueurs du monde</strong><br>
       Cette année, il se déroulera à <strong>Bruxelles, <br>
       à Tour & Taxis, du 4 au 8 mai.</strong>
     </p>
@@ -31,7 +31,7 @@
         Kuikma sera aussi présent avec ses <br>
         ambassadeurs et sa gamme Expert.
         </strong>
-      </p>
+    </p>
   </article>
 
   <div class="img-block">
@@ -84,6 +84,9 @@ p {
   line-height: 24px;
   color: #001018;
 }
+.paragraph {
+  margin: 1rem 0 1rem 0;
+}
 .img-block {
   width: 50%;
   height: 100%;
@@ -126,19 +129,24 @@ img {
   }
   svg {
     top: 10rem;
-    right: 1rem;
+    right: 0;
+    width: 50px;
   }
   article, .img-block {
     padding: 3rem;
   }
   article {
     height: 375px;
+
   }
+  .paragraph {
+  margin: 0;
+}
 }
 
 @media screen and (max-width: 375px){
   .border-left {
-    top:0.5rem;
+    top:0;
     left: 1rem;
   }
   article, .img-block {
