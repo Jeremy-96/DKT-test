@@ -4,10 +4,16 @@
   let sport;
   const promise = fetchItem();
 
+  /**
+   * Get only one sport data by using fetch api and a specific sport id
+   * @async
+   * @function fetchItem
+   * @returns {sport} sport data in a json file
+   * @author Jérémy Thonon <jeremythonon96@hotmail.com>
+   */
   async function fetchItem(){
     const res = await fetch(`https://sports.api.decathlon.com/sports/${id}`);    
     const json = await res.json();
-
     sport = json.data;
 
     return sport;
@@ -18,6 +24,7 @@
 <div class="container">
   {#await promise}
     <p>Chargement...</p>
+
   {:then sport}
     <div class="card">
       <div class="card-header">
@@ -32,6 +39,7 @@
       {#if sport.attributes.description}
         <p class="card-description">{sport.attributes.description}</p>
       {/if}
+
       {#if sport.relationships.tags.data}
         <div class="card-tags">
           {#each sport.relationships.tags.data as tag}
@@ -40,12 +48,12 @@
         </div>
       {/if}
     </div>
+
   {:catch error}
     <p>Une erreur est survenue : {error}</p>
   {/await}
 </div>
 <!-- HTML end -->
-
 
 <style>
 .container {

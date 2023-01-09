@@ -1,18 +1,24 @@
 <script>
+  /**
+	 * Import useful packages from 'svelte-routing'
+   * Export some useful variables that will be used in other components
+   * Initialize variables used in this component
+	 */
   import { link } from 'svelte-routing';
   export let sports = [];
+
 
   const paginationLimit = 12;
   let pageCount = Math.ceil(sports.length / paginationLimit);
   let currentPage = 1;
   localStorage.setItem('currentPage', currentPage);
   let searchTag = localStorage.getItem('input');
-
   let hasDktId = localStorage.getItem('hasDktID');
   let url = window.location.href;
   let searchParams = new window.URL(url).searchParams;
   let page = searchParams.get('page');
 
+  // If the number of the page changes in the url --> update the currentPage variable
   if(page && searchTag.length == 0){
     localStorage.setItem('currentPage', page);
     currentPage = parseInt(page);
@@ -21,7 +27,9 @@
   }
 
   /**
-   * PreviousPage and nextPage is used to change the current page 
+   * Go to previous page
+   * @function previousPage
+   * @author Jérémy Thonon <jeremythonon96@hotmail.com>
    */
   function previousPage(){
     if (currentPage > 1) {
@@ -31,6 +39,11 @@
     }
   }
 
+  /**
+   * Go to next page
+   * @function nextPage
+   * @author Jérémy Thonon <jeremythonon96@hotmail.com>
+   */
   function nextPage(){
     if (currentPage < pageCount) {
       currentPage += 1;
@@ -39,29 +52,38 @@
     }
   }
 
+  /**
+   * Return the list of all sports considering the input values given in the search-bar
+   * @function searchResult
+   * @author Jérémy Thonon <jeremythonon96@hotmail.com>
+   */
   function searchResult(){
     let hasId;
 
+    // Check if the checkbox value for decathlon_id is set to true or false and filter the sports based on that
     if (hasDktId == 'true'){
       hasId = sports.filter(sport => sport.attributes.decathlon_id != null);
     } else{
       hasId = sports;
     }
 
+    // Check if the search-bar input value (sport tag) is empty or not and filter the sports based on that
+    // Note: the input value is cleaned (string to lowercase + remove white spaces and ponctuation)
     if (searchTag != null && searchTag.length > 0){
       let cleanSearchTag = searchTag.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~() ]/g,"");
       const results = hasId.filter(sport => sport.relationships.tags.data.includes(cleanSearchTag));
+
+      // If the input value gives some results --> CurrentPage is set to 1
       if(results.length > 0){
         localStorage.setItem('currentPage', 1);
-        console.log("hello");
       }
+      // If the input value gives no result --> CurrentPage is set to 0
       else {
         localStorage.setItem('currentPage', 0);
         currentPage = localStorage.getItem('currentPage');
-        console.log("else");
       }
+      
       pageCount = Math.ceil(results.length / paginationLimit)
-
       return results;
 
     } else {

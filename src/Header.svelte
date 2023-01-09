@@ -1,12 +1,25 @@
 <script context="module">
-
+// Store the input value of the searchbar
 let searchQuery = "";
+// Set the checkbox value to false
 let hasDktId = false;
 
+/**
+ * Listen input value in the searchbar
+ * @function handleSearch
+ * @param event
+ * @author Jérémy Thonon <jeremythonon96@hotmail.com>
+ */
 function handleSearch(event){
   searchQuery = event.target.value;
 }
 
+/**
+ * Submit all input values of the searchbar form and store them in the localStorage
+ * @function handleSubmit
+ * @param event
+ * @author Jérémy Thonon <jeremythonon96@hotmail.com>
+ */
 function handleSubmit(event){
   event.preventDefault();
   localStorage.setItem('input', searchQuery);

@@ -118,6 +118,7 @@ img {
     height: 450px;
   }
 }
+
 @media screen and (max-width: 768px){
   .border-left {
     top:2rem;
@@ -134,6 +135,7 @@ img {
     height: 375px;
   }
 }
+
 @media screen and (max-width: 375px){
   .border-left {
     top:0.5rem;
