@@ -1,4 +1,5 @@
 <script>
+  import Loader from "./Loader.svelte";
   export let id;
 
   let sport;
@@ -23,7 +24,7 @@
 <!-- HTML start -->
 <div class="container">
   {#await promise}
-    <p>Chargement...</p>
+    <Loader />
 
   {:then sport}
     <div class="card">

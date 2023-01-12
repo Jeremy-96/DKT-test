@@ -7,6 +7,7 @@
 	import SportsList from "./SportsList.svelte";
 	import Footer from "./Footer.svelte";
   import Sport from "./Sport.svelte";
+	import Loader from "./Loader.svelte";
 
 
 	const promise = getAllSports(); 
@@ -31,7 +32,7 @@
 	<Header />
 
 	{#await promise}
-		<p>Chargement...</p>
+		<Loader />
 	{:then sports}
 	<SportsList sports={sports} />
 	{:catch error}
